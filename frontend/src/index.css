@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #f9a8d4, #c084fc, #60a5fa);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+}
+
+.app {
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-todo {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.add-todo input[type="text"],
+.add-todo input[type="datetime-local"] {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.add-todo button {
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.bottom-section {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+}
+
+.todo-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.todo-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #4198ef;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.todo-item.done {
+    background: #bbf7d0;
+    text-decoration: line-through;
+}
+
+.todo-item.pending {
+    background: #fecaca;
+}
+
+button {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
