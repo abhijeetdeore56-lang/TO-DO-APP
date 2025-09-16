@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./index.css";
 
-const API = "http://localhost:5000";
+const API = "http://localhost:3000";
 
 
 export default function App() {
@@ -16,19 +16,50 @@ export default function App() {
     fetchTodos();
   }, []);
 
+  // const fetchTodos = async () => {
+  //   try {
+  //     // const res = await axios.get(`${API}/todos`);
+  //     const res1 = await fetch(`${API}/todos`);
+  //     const res = await res1.json();
+  //     // Initialize frontend-only 'reminded' flag for todos
+  //     const todosWithReminded = res.data.map((t) => ({
+  //       ...t,
+  //       reminded: false,
+  //     }));
+  //     setTodos(todosWithReminded);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   const fetchTodos = async () => {
-    try {
-      const res = await axios.get(`${API}/todos`);
-      // Initialize frontend-only 'reminded' flag for todos
-      const todosWithReminded = res.data.map((t) => ({
-        ...t,
-        reminded: false,
-      }));
-      setTodos(todosWithReminded);
-    } catch (err) {
-      console.error(err);
+  try {
+    const res1 = await fetch(`${API}/todos`);
+
+    if (!res1.ok) {
+      throw new Error(`HTTP error! Status: ${res1.status}`);
     }
-  };
+
+    const res = await res1.json();
+    console.log("Fetched response:", res);
+
+    // Support both: res = [ {...}, {...} ]  OR  res = { data: [ {...}, {...} ] }
+    const todosArray = Array.isArray(res) ? res : res.data;
+
+    if (!Array.isArray(todosArray)) {
+      throw new Error("Unexpected response format");
+    }
+
+    const todosWithReminded = todosArray.map((t) => ({
+      ...t,
+      reminded: false,
+    }));
+
+    setTodos(todosWithReminded);
+  } catch (err) {
+    console.error("Failed to fetch todos:", err);
+  }
+};
+
 
   const addTodo = async () => {
     if (!newTodo.trim()) return;
