@@ -1,22 +1,16 @@
-// backend
-"scripts"; { "start"; "node index.js", "dev"; "nodemon index.js" }
-
-
-
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
-const PORT = 3000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Connect MongoDB
+// Connect MongoDB (Atlas connection string via env variable)
 mongoose
-    .connect("mongodb://127.0.0.1:27017/todosApp", {
+    .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -57,6 +51,8 @@ app.delete("/todos/:id", async(req, res) => {
     res.json({ success: true });
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
 // Start server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`🚀 Server running on port ${port}`);
+});
