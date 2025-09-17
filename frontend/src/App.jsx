@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./index.css";
 
-const API = "http://localhost:3000";
+const API = "https://to-do-app-e2jf.onrender.com";
 
 
 export default function App() {
